@@ -1,10 +1,13 @@
 // import express from "express";
 import dotenv from "dotenv";
+// import { useExpressServer } from 'routing-controllers';
 import { createExpressServer } from 'routing-controllers'
-import {UserController} from "./controller/user-controller";
+import { UserController } from "./controller/user-controller";
+import httpContext from 'express-http-context';
+// import log4js from "log4js";
 dotenv.config()
 
-// import log4js from "log4js";
+
 
 
 // const logger:any = log4js.getLogger()
@@ -18,6 +21,7 @@ const app = createExpressServer({
     controllers:[UserController]
 })
 const port = process.env.PORT
-// app.get('/', (_, res) => res.send("good connect"))
+app.use(httpContext.middleware);
+app.get('/', (_req:any, res:any) => res.send("good connect"))
 // app.get('/',(req,res,next))
 app.listen(port, () => console.log(`run ${port} port`));
