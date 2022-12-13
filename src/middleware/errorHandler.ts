@@ -4,6 +4,7 @@ import { ExpressErrorMiddlewareInterface, Middleware } from 'routing-controllers
 export class ErrorHandler implements ExpressErrorMiddlewareInterface {
     error(error: any, _request: any, response: any, next: () => any): void {
         response.status(error.statusCode || error.httpCode).json(error)
+        console.log(error.httpCode)
         next()
         
     }
